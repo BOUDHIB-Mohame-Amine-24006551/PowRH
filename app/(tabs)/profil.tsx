@@ -1,46 +1,96 @@
-import { StyleSheet } from 'react-native';
+import { Feather } from '@expo/vector-icons';
+import React from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
-import ParallaxScrollView from '@/components/parallax-scroll-view';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Fonts } from '@/constants/theme';
+import { useThemeColor } from '@/hooks/use-theme-color';
 
 export default function ProfilScreen() {
+  const iconColor = useThemeColor({}, 'icon');
+  const backgroundColor = useThemeColor({}, 'background');
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="person.fill"
-          style={styles.headerImage}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText
-          type="title"
-          style={{
-            fontFamily: Fonts.rounded,
-          }}>
-          Mon Profil
+    <ThemedView style={styles.container}>
+      <View style={styles.profileHeader}>
+        <View style={[styles.avatarContainer, { borderColor: backgroundColor }]}>
+          <Feather name="user" size={48} color="#0a7ea4" />
+        </View>
+        <ThemedText type="title" style={styles.nameText}>
+          Admin
         </ThemedText>
-      </ThemedView>
-      <ThemedText>Ceci est votre page de profil.</ThemedText>
-    </ParallaxScrollView>
+        <ThemedText style={styles.emailText}>admin@powrh.fr</ThemedText>
+      </View>
+
+      <View style={styles.actionsContainer}>
+        <TouchableOpacity style={styles.actionButton}>
+          <ThemedText style={styles.actionText}>Paramètres du compte</ThemedText>
+          <Feather name="settings" size={20} color={iconColor} />
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.actionButton}>
+          <ThemedText style={styles.logoutText}>Déconnexion</ThemedText>
+          <Feather name="log-out" size={20} color="#EF4444" />
+        </TouchableOpacity>
+      </View>
+    </ThemedView>
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+  container: {
+    flex: 1,
+    padding: 24,
+    paddingTop: 80,
   },
-  titleContainer: {
+  profileHeader: {
+    alignItems: 'center',
+    marginBottom: 40,
+  },
+  avatarContainer: {
+    width: 96,
+    height: 96,
+    borderRadius: 48,
+    backgroundColor: '#E6F2FF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 16,
+    borderWidth: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 3,
+    elevation: 2,
+  },
+  nameText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 4,
+  },
+  emailText: {
+    fontSize: 16,
+    color: '#6B7280',
+  },
+  actionsContainer: {
+    gap: 16,
+  },
+  actionButton: {
     flexDirection: 'row',
-    gap: 8,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 16,
+    borderRadius: 12,
+    backgroundColor: 'rgba(150, 150, 150, 0.1)',
+    borderWidth: 1,
+    borderColor: 'rgba(150, 150, 150, 0.15)',
+  },
+  actionText: {
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  logoutText: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#EF4444',
   },
 });
