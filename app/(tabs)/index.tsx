@@ -109,6 +109,7 @@ export default function DirectoryScreen() {
           {filteredTechnicians.map((tech) => (
             <TouchableOpacity 
               key={tech.id} 
+              onPress={() => router.push({ pathname: '/technician/[id]', params: { id: tech.id } })}
               style={{ 
                 flexDirection: 'row', 
                 backgroundColor: 'rgba(150, 150, 150, 0.05)', 

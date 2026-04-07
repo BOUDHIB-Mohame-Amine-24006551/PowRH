@@ -18,7 +18,7 @@ export default function RootLayout() {
     <TechnicianProvider>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false, title: 'Accueil' }} />
           <Stack.Screen name="new-technician" options={{ title: 'Nouveau Technicien', headerBackTitle: 'Retour' }} />
           <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
         </Stack>
