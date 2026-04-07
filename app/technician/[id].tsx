@@ -132,7 +132,10 @@ export default function TechnicianDetailScreen() {
         options={{
           title: `${technician.firstName} ${technician.lastName}`,
           headerRight: () => (
-            <TouchableOpacity style={{ marginRight: 8 }}>
+            <TouchableOpacity 
+              style={{ marginRight: 8 }}
+              onPress={() => router.push({ pathname: '/technician/edit/[id]', params: { id: technician.id } })}
+            >
               <Feather name="edit-3" size={22} color="#2563EB" />
             </TouchableOpacity>
           )
