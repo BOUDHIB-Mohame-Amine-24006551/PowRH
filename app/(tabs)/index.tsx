@@ -139,7 +139,14 @@ export default function DirectoryScreen() {
                     borderRadius: 4, 
                     backgroundColor: tech.status === 'Disponible' ? '#10B981' : tech.status === 'Actif' ? '#3B82F6' : '#EF4444' 
                   }} />
-                  <ThemedText style={{ fontSize: 12, color: iconColor }}>{tech.status}</ThemedText>
+                  <ThemedText 
+                    style={{ fontSize: 12, color: iconColor }}
+                    numberOfLines={1}
+                    ellipsizeMode="tail"
+                  >
+                    {tech.status}
+                    {tech.status === 'Actif' && tech.currentTask ? ` : ${tech.currentTask}` : ''}
+                  </ThemedText>
                 </View>
               </View>
               <Feather name="chevron-right" size={20} color={iconColor} />
