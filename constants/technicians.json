@@ -1,0 +1,101 @@
+[
+  {
+    "id": "it-1",
+    "firstName": "Marc",
+    "lastName": "Lavoie",
+    "specialty": "Développeur Fullstack",
+    "status": "Actif",
+    "radius": 40,
+    "address": "15 Rue de la République, 13001 Marseille",
+    "tjm": 550,
+    "phone": "06 11 22 33 44",
+    "email": "m.lavoie@it-provence.fr",
+    "currentTask": "Migration Cloud AWS - Projet E-commerce"
+  },
+  {
+    "id": "it-2",
+    "firstName": "Sarah",
+    "lastName": "Benali",
+    "specialty": "Ingénieure DevOps",
+    "status": "Actif",
+    "radius": 60,
+    "address": "Avenue Giuseppe Verdi, 13100 Aix-en-Provence",
+    "tjm": 650,
+    "phone": "06 22 33 44 55",
+    "email": "sarah.b@devops-sud.pro",
+    "currentTask": "Automatisation CI/CD & Scan de vulnérabilités"
+  },
+  {
+    "id": "it-3",
+    "firstName": "Thomas",
+    "lastName": "Petit",
+    "specialty": "Expert Cyber-sécurité",
+    "status": "Actif",
+    "radius": 50,
+    "address": "34 Boulevard Michelet, 13008 Marseille",
+    "tjm": 800,
+    "phone": "06 33 44 55 66",
+    "email": "t.petit@secure-paca.com",
+    "currentTask": "Audit de pénétration (Pentest) - Portail Banque"
+  },
+  {
+    "id": "it-4",
+    "firstName": "Julien",
+    "lastName": "Ferrand",
+    "specialty": "Administrateur Réseaux",
+    "status": "Disponible",
+    "radius": 30,
+    "address": "Zone Industrielle des Paluds, 13400 Aubagne",
+    "tjm": 450,
+    "phone": "06 44 55 66 77",
+    "email": "j.ferrand@net-solutions.fr"
+  },
+  {
+    "id": "it-5",
+    "firstName": "Emilie",
+    "lastName": "Roche",
+    "specialty": "Développeuse Mobile (React Native)",
+    "status": "Disponible",
+    "radius": 25,
+    "address": "Quai Ganteaume, 13600 La Ciotat",
+    "tjm": 500,
+    "phone": "06 55 66 77 88",
+    "email": "emilie.r@app-creators.io"
+  },
+  {
+    "id": "it-6",
+    "firstName": "Karim",
+    "lastName": "Mansour",
+    "specialty": "Data Scientist",
+    "status": "Indisponible",
+    "radius": 45,
+    "address": "Boulevard de Dunkerque, 13002 Marseille",
+    "tjm": 700,
+    "phone": "06 66 77 88 99",
+    "email": "k.mansour@data-lab.fr"
+  },
+  {
+    "id": "it-7",
+    "firstName": "Sophie",
+    "lastName": "Morel",
+    "specialty": "UI/UX Designer",
+    "status": "Congés",
+    "radius": 20,
+    "address": "Route de Galice, 13090 Aix-en-Provence",
+    "tjm": 480,
+    "phone": "06 77 88 99 00",
+    "email": "sophie.ux@design-provence.fr"
+  },
+  {
+    "id": "it-8",
+    "firstName": "Lucas",
+    "lastName": "Grondin",
+    "specialty": "Support Technique L2",
+    "status": "Inconnu",
+    "radius": 35,
+    "address": "Chemin du Griffon, 13127 Vitrolles",
+    "tjm": 350,
+    "phone": "06 88 99 00 11",
+    "email": "l.grondin@it-support.fr"
+  }
+]

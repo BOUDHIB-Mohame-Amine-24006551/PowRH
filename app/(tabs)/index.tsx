@@ -18,16 +18,16 @@ export default function DirectoryScreen() {
   const textColor = useThemeColor({}, 'text');
   const iconColor = useThemeColor({}, 'icon');
 
-  const filters = ['Tous', 'Disponibles', 'Plomberie', 'Électricité', 'Autour de moi'];
+  const filters = ['Tous', 'Disponible', 'Actif', 'Indisponible', 'Congés'];
 
   const filteredTechnicians = technicians.filter(tech => {
     const matchesSearch = `${tech.firstName} ${tech.lastName}`.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          tech.specialty.toLowerCase().includes(searchQuery.toLowerCase());
     
     if (activeFilter === 'Tous') return matchesSearch;
-    if (activeFilter === 'Disponibles') return matchesSearch && tech.status === 'Disponible';
-    return matchesSearch && tech.specialty === activeFilter;
+    return matchesSearch && tech.status === activeFilter;
   });
+
 
   return (
     <ThemedView style={styles.container}>

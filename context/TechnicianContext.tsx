@@ -1,4 +1,6 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import initialTechnicians from '../constants/technicians.json';
 
 export type TechnicianStatus = 'Disponible' | 'Actif' | 'Indisponible' | 'Congés' | 'Inconnu';
 
@@ -23,38 +25,48 @@ interface TechnicianContextType {
   deleteTechnician: (id: string) => void;
 }
 
-const mockTechnicians: Technician[] = [
-  {
-    id: '1',
-    firstName: 'Alice',
-    lastName: 'Dubois',
-    specialty: 'Plomberie',
-    status: 'Disponible',
-    radius: 30,
-    address: '12 Rue de la Paix, Paris',
-    tjm: 450,
-    phone: '06 12 34 56 78',
-    email: 'alice.dubois@powrh.fr',
-  },
-  {
-    id: '2',
-    firstName: 'Bernard',
-    lastName: 'Lefebvre',
-    specialty: 'Électricité',
-    status: 'Actif',
-    radius: 50,
-    address: '45 Avenue de la République, Lyon',
-    tjm: 500,
-    phone: '06 98 76 54 32',
-    email: 'bernard.l@powrh.fr',
-    currentTask: 'Chantier Gare Part-Dieu',
-  },
-];
-
 const TechnicianContext = createContext<TechnicianContextType | undefined>(undefined);
 
+const STORAGE_KEY = '@technicians_it_v1';
+
 export const TechnicianProvider = ({ children }: { children: ReactNode }) => {
-  const [technicians, setTechnicians] = useState<Technician[]>(mockTechnicians);
+  const [technicians, setTechnicians] = useState<Technician[]>(initialTechnicians as Technician[]);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  // Load data on mount
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const savedData = await AsyncStorage.getItem(STORAGE_KEY);
+        if (savedData) {
+          setTechnicians(JSON.parse(savedData));
+          console.log('Données chargées depuis AsyncStorage');
+        }
+      } catch (error) {
+        console.error('Erreur lors du chargement des techniciens:', error);
+      } finally {
+        setIsInitialized(true);
+      }
+    };
+    loadData();
+  }, []);
+
+  // Save data whenever technicians state changes, only after initial load
+  useEffect(() => {
+    const saveData = async () => {
+      if (!isInitialized) return;
+
+      try {
+        await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(technicians));
+        console.log('Données sauvegardées dans AsyncStorage');
+      } catch (error) {
+        console.error('Erreur lors de la sauvegarde des techniciens:', error);
+      }
+    };
+    saveData();
+  }, [technicians, isInitialized]);
+
+
 
   const addTechnician = (tech: Omit<Technician, 'id'>) => {
     const newTech = {
@@ -88,3 +100,4 @@ export const useTechnicians = () => {
   }
   return context;
 };
+
