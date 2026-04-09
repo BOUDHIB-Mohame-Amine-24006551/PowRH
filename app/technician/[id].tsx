@@ -35,6 +35,9 @@ export default function TechnicianDetailScreen() {
     );
   }
 
+  const smsMessage = `Bonjour ${technician.firstName}, une mission urgente nécessite votre aide. Merci de nous contacter rapidement. L'équipe Pow'RH.`;
+  const emailMessage = `Bonjour ${technician.firstName},\n\nNous avons une mission urgente qui correspond à votre profil et nous souhaiterions solliciter votre aide.\n\nPourriez-vous nous recontacter au plus vite pour les détails ?\n\nCordialement,\nL'équipe Pow'RH`;
+  
   const handleCall = () => {
     if (technician.phone) {
       Linking.openURL(`tel:${technician.phone.replace(/\s/g, '')}`);
@@ -45,7 +48,8 @@ export default function TechnicianDetailScreen() {
 
   const handleSms = () => {
     if (technician.phone) {
-      Linking.openURL(`sms:${technician.phone.replace(/\s/g, '')}`);
+      const url = `sms:${technician.phone.replace(/\s/g, '')}${Platform.OS === 'ios' ? '&' : '?'}body=${encodeURIComponent(smsMessage)}`;
+      Linking.openURL(url);
     } else {
       Alert.alert('Erreur', 'Aucun numéro de téléphone disponible.');
     }
@@ -53,12 +57,13 @@ export default function TechnicianDetailScreen() {
 
   const handleEmail = () => {
     if (technician.email) {
-      Linking.openURL(`mailto:${technician.email}`);
+      const subject = encodeURIComponent("Mission urgente - Pow'RH");
+      const body = encodeURIComponent(emailMessage);
+      Linking.openURL(`mailto:${technician.email}?subject=${subject}&body=${body}`);
     } else {
       Alert.alert('Erreur', "Aucune adresse e-mail disponible.");
     }
   };
-
   const handleStatusChange = (newStatus: TechnicianStatus, task?: string) => {
     const updates: any = { status: newStatus };
     if (newStatus === 'Actif' && task !== undefined) {
@@ -149,8 +154,8 @@ export default function TechnicianDetailScreen() {
             <View style={[styles.avatarContainer, { backgroundColor: 'rgba(37, 99, 235, 0.05)' }]}>
               <Feather name="user" size={60} color="#2563EB" />
             </View>
-            <View style={styles.statusBadge}>
-              <ThemedText style={styles.statusBadgeText}>
+            <View style={[styles.statusBadge, { backgroundColor: textColor }]}>
+              <ThemedText style={[styles.statusBadgeText, { color: bgColor }]}>
                 {technician.status}
               </ThemedText>
             </View>
@@ -161,13 +166,13 @@ export default function TechnicianDetailScreen() {
           <ThemedText style={styles.tjm}>TJM : {technician.tjm} €/jour</ThemedText>
 
           <View style={styles.actionContainer}>
-            <TouchableOpacity style={[styles.actionButton, styles.callButton]} onPress={handleCall}>
+            <TouchableOpacity style={[styles.actionButton, { backgroundColor: 'rgba(150, 150, 150, 0.1)' }]} onPress={handleCall}>
               <Feather name="phone" size={24} color="#2563EB" />
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.actionButton, styles.messageButton]} onPress={handleSms}>
+            <TouchableOpacity style={[styles.actionButton, { backgroundColor: 'rgba(150, 150, 150, 0.1)' }]} onPress={handleSms}>
               <Feather name="message-square" size={24} color="#10B981" />
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.actionButton, styles.mailButton]} onPress={handleEmail}>
+            <TouchableOpacity style={[styles.actionButton, { backgroundColor: 'rgba(150, 150, 150, 0.1)' }]} onPress={handleEmail}>
               <Feather name="mail" size={24} color="#8B5CF6" />
             </TouchableOpacity>
           </View>
@@ -194,24 +199,24 @@ export default function TechnicianDetailScreen() {
           <ThemedText style={styles.label}>Statut actuel</ThemedText>
 
           <TouchableOpacity
-            style={styles.customPickerButton}
+            style={[styles.customPickerButton, { backgroundColor: 'rgba(150, 150, 150, 0.1)' }]}
             onPress={showStatusOptions}
             activeOpacity={0.7}
           >
             <View style={styles.statusInfo}>
               <ThemedText style={styles.statusDot}>{getStatusIcon(technician.status)}</ThemedText>
-              <ThemedText style={[styles.pickerText, { color: '#FFFFFF' }]}>
+              <ThemedText style={[styles.pickerText, { color: textColor }]}>
                 {technician.status}
               </ThemedText>
             </View>
-            <Feather name="chevron-down" size={20} color="#FFFFFF" opacity={0.6} />
+            <Feather name="chevron-down" size={20} color={iconColor} opacity={0.6} />
           </TouchableOpacity>
 
           {technician.status === 'Actif' && (
             <View style={styles.taskInputContainer}>
               <ThemedText style={styles.taskLabelHighlight}>Mission affectée</ThemedText>
               <TextInput
-                style={styles.taskInput}
+                style={[styles.taskInput, { color: textColor }]}
                 value={technician.currentTask}
                 onChangeText={(text) => handleStatusChange('Actif', text)}
                 placeholder="Décrivez la tâche en cours..."
@@ -242,8 +247,8 @@ export default function TechnicianDetailScreen() {
           }}
         >
           {!isSelectingTask ? (
-            <View style={styles.materialModal}>
-              <ThemedText style={styles.materialTitle}>Changer le statut</ThemedText>
+            <View style={[styles.materialModal, { backgroundColor: bgColor }]}>
+              <ThemedText style={[styles.materialTitle, { color: textColor }]}>Changer le statut</ThemedText>
               {options.map((opt) => (
                 <TouchableOpacity
                   key={opt}
@@ -259,7 +264,7 @@ export default function TechnicianDetailScreen() {
                   }}
                 >
                   <ThemedText style={{ fontSize: 20 }}>{getStatusIcon(opt)}</ThemedText>
-                  <ThemedText style={styles.modalOptionText}>{opt}</ThemedText>
+                  <ThemedText style={[styles.modalOptionText, { color: textColor }]}>{opt}</ThemedText>
                 </TouchableOpacity>
               ))}
               <View style={styles.materialActions}>
@@ -272,15 +277,15 @@ export default function TechnicianDetailScreen() {
               </View>
             </View>
           ) : (
-            <View style={styles.materialModal}>
-              <ThemedText style={styles.materialTitle}>
+            <View style={[styles.materialModal, { backgroundColor: bgColor }]}>
+              <ThemedText style={[styles.materialTitle, { color: textColor }]}>
                 Tâche affectée à {technician.firstName} {technician.lastName}
               </ThemedText>
               <ThemedText style={styles.materialMessage}>
                 Renseigner la tâche à affecter à ce technicien (obligatoire)
               </ThemedText>
               <TextInput
-                style={styles.materialInput}
+                style={[styles.materialInput, { color: textColor }]}
                 value={tempTask}
                 onChangeText={setTempTask}
                 placeholder="Décrivez la mission..."

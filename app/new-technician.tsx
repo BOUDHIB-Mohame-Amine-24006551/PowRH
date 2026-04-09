@@ -13,7 +13,7 @@ import { useTechnicians, Technician } from '@/context/TechnicianContext';
 
 export default function NewTechnicianScreen() {
   const router = useRouter();
-  const { technicians, addTechnician } = useTechnicians();
+  const { technicians, addTechnician, specialties } = useTechnicians();
 
   const textColor = useThemeColor({}, 'text');
   const iconColor = useThemeColor({}, 'icon');
@@ -32,8 +32,6 @@ export default function NewTechnicianScreen() {
   });
 
   const handleSubmit = () => {
-    console.log('--- Form Submission ---');
-    console.log('Data:', formData);
     if (!formData.firstName || !formData.lastName || !formData.address) {
       alert('Veuillez remplir les champs obligatoires (Nom, Prénom, Adresse)');
       return;
@@ -41,7 +39,6 @@ export default function NewTechnicianScreen() {
 
     try {
       addTechnician(formData);
-      console.log('Technician successfully added');
       router.push('/');
     } catch (error) {
       console.error('Error adding technician:', error);
@@ -155,13 +152,24 @@ export default function NewTechnicianScreen() {
           
           <View style={styles.inputGroup}>
             <ThemedText style={styles.label}>Spécialité</ThemedText>
-            <TextInput
-              style={[styles.input, { color: textColor }]}
-              placeholder="Ex: Plomberie, Chauffage..."
-              placeholderTextColor={iconColor}
-              value={formData.specialty}
-              onChangeText={(text) => setFormData({ ...formData, specialty: text })}
-            />
+            <View style={{ 
+              backgroundColor: 'rgba(150, 150, 150, 0.1)', 
+              borderRadius: 12, 
+              marginTop: 8,
+              overflow: 'hidden'
+            }}>
+              <Picker
+                selectedValue={formData.specialty}
+                onValueChange={(itemValue) => setFormData({ ...formData, specialty: itemValue })}
+                style={{ color: textColor }}
+                dropdownIconColor={iconColor}
+              >
+                <Picker.Item label="Sélectionner une spécialité..." value="" />
+                {specialties.map(spec => (
+                  <Picker.Item key={spec} label={spec} value={spec} />
+                ))}
+              </Picker>
+            </View>
           </View>
 
           <View style={styles.inputGroup}>

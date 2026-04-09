@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import { View, TextInput, ScrollView, TouchableOpacity, Platform, Alert } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 
@@ -11,21 +11,88 @@ import { useTechnicians } from '@/context/TechnicianContext';
 
 export default function DirectoryScreen() {
   const router = useRouter();
-  const { technicians } = useTechnicians();
+  const { technicians, specialties, addSpecialty, removeSpecialty } = useTechnicians();
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('Tous');
+  const [activeSpecialty, setActiveSpecialty] = useState('Toutes spécialités');
 
   const textColor = useThemeColor({}, 'text');
   const iconColor = useThemeColor({}, 'icon');
 
-  const filters = ['Tous', 'Disponible', 'Actif', 'Indisponible', 'Congés'];
+  const filters = ['Disponible', 'Actif', 'Indisponible', 'Congés'];
+  const allFilters = ['Tous', ...filters];
+  
+  const specialtyFilters = [
+    'Toutes spécialités',
+    ...specialties
+  ];
+
+  const handleAddSpecialty = () => {
+    if (Platform.OS === 'ios') {
+      Alert.prompt(
+        "Nouvelle spécialité",
+        "Entrez le nom de la spécialité à ajouter aux filtres",
+        [
+          { text: "Annuler", style: "cancel" },
+          { 
+            text: "Ajouter", 
+            onPress: (text) => {
+              if (text) {
+                addSpecialty(text);
+                setActiveSpecialty(text);
+              }
+            } 
+          }
+        ]
+      );
+    } else {
+      Alert.alert(
+        "Nouvelle spécialité", 
+        "Entrez le nom de la spécialité (Simulé pour Android)",
+        [
+          { text: "Annuler", style: "cancel" },
+          { text: "Ajouter DevOps Pro", onPress: () => {
+              addSpecialty("DevOps Pro");
+              setActiveSpecialty("DevOps Pro");
+          }}
+        ]
+      );
+    }
+  };
+
+  const handleRemoveSpecialty = () => {
+    if (specialties.length === 0) {
+      Alert.alert("Information", "Il n'y a aucune spécialité à supprimer.");
+      return;
+    }
+
+    Alert.alert(
+      "Supprimer une spécialité",
+      "Quelle spécialité souhaitez-vous supprimer ?",
+      [
+        { text: "Annuler", style: "cancel" },
+        ...specialties.map(spec => ({
+          text: spec,
+          style: 'destructive' as const,
+          onPress: () => {
+            removeSpecialty(spec);
+            if (activeSpecialty === spec) {
+              setActiveSpecialty('Toutes spécialités');
+            }
+          }
+        }))
+      ]
+    );
+  };
 
   const filteredTechnicians = technicians.filter(tech => {
     const matchesSearch = `${tech.firstName} ${tech.lastName}`.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          tech.specialty.toLowerCase().includes(searchQuery.toLowerCase());
     
-    if (activeFilter === 'Tous') return matchesSearch;
-    return matchesSearch && tech.status === activeFilter;
+    const matchesStatus = activeFilter === 'Tous' || tech.status === activeFilter;
+    const matchesSpecialty = activeSpecialty === 'Toutes spécialités' || tech.specialty === activeSpecialty;
+
+    return matchesSearch && matchesStatus && matchesSpecialty;
   });
 
 
@@ -69,7 +136,7 @@ export default function DirectoryScreen() {
           showsHorizontalScrollIndicator={false}
           style={styles.filterScroll}
         >
-          {filters.map((filter) => (
+          {allFilters.map((filter) => (
             <TouchableOpacity
               key={filter}
               onPress={() => setActiveFilter(filter)}
@@ -78,14 +145,6 @@ export default function DirectoryScreen() {
                 activeFilter === filter ? styles.activeFilterChip : styles.inactiveFilterChip
               ]}
             >
-              {filter === 'Autour de moi' && (
-                <Feather 
-                  name="map-pin" 
-                  size={14} 
-                  color={activeFilter === filter ? '#FFFFFF' : textColor} 
-                  style={{ marginRight: 6 }} 
-                />
-              )}
               <ThemedText 
                 style={[
                   styles.filterChipText,
@@ -93,6 +152,53 @@ export default function DirectoryScreen() {
                 ]}
               >
                 {filter}
+              </ThemedText>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+
+        <ScrollView 
+          horizontal 
+          showsHorizontalScrollIndicator={false}
+          style={[styles.filterScroll, { marginTop: 8 }]}
+        >
+          <TouchableOpacity
+            onPress={handleAddSpecialty}
+            style={[
+              styles.filterChip,
+              { backgroundColor: 'rgba(37, 99, 235, 0.1)', borderStyle: 'dotted', borderWidth: 1, borderColor: '#2563EB', marginRight: 8 }
+            ]}
+          >
+            <Feather name="plus" size={14} color="#2563EB" style={{ marginRight: 4 }} />
+            <ThemedText style={{ color: '#2563EB', fontSize: 13, fontWeight: '600' }}>Ajouter</ThemedText>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={handleRemoveSpecialty}
+            style={[
+              styles.filterChip,
+              { backgroundColor: 'rgba(239, 68, 68, 0.1)', borderStyle: 'dotted', borderWidth: 1, borderColor: '#EF4444', marginRight: 8 }
+            ]}
+          >
+            <Feather name="trash-2" size={14} color="#EF4444" style={{ marginRight: 4 }} />
+            <ThemedText style={{ color: '#EF4444', fontSize: 13, fontWeight: '600' }}>Supprimer</ThemedText>
+          </TouchableOpacity>
+          {specialtyFilters.map((spec) => (
+            <TouchableOpacity
+              key={spec}
+              onPress={() => setActiveSpecialty(spec)}
+              style={[
+                styles.filterChip,
+                activeSpecialty === spec ? styles.activeFilterChip : styles.inactiveFilterChip,
+                { backgroundColor: activeSpecialty === spec ? '#10B981' : 'rgba(150, 150, 150, 0.1)' }
+              ]}
+            >
+              <ThemedText 
+                style={[
+                  styles.filterChipText,
+                  activeSpecialty === spec ? styles.activeFilterChipText : undefined
+                ]}
+              >
+                {spec}
               </ThemedText>
             </TouchableOpacity>
           ))}

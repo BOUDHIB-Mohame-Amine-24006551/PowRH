@@ -3,6 +3,7 @@ import { View, TextInput, ScrollView, TouchableOpacity, Platform, Keyboard, Touc
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
+import { Picker } from '@react-native-picker/picker';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -13,7 +14,7 @@ import { useTechnicians, Technician } from '@/context/TechnicianContext';
 export default function EditTechnicianScreen() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
-  const { technicians, updateTechnician } = useTechnicians();
+  const { technicians, updateTechnician, specialties } = useTechnicians();
 
   const technician = technicians.find((t) => t.id === id);
 
@@ -162,13 +163,24 @@ export default function EditTechnicianScreen() {
             
             <View style={styles.inputGroup}>
               <ThemedText style={styles.label}>Spécialité</ThemedText>
-              <TextInput
-                style={[styles.input, { color: textColor }]}
-                value={formData.specialty}
-                onChangeText={(text) => setFormData({ ...formData, specialty: text })}
-                placeholder="Ex: Plomberie, Chauffage..."
-                placeholderTextColor={iconColor}
-              />
+              <View style={{ 
+                backgroundColor: 'rgba(150, 150, 150, 0.1)', 
+                borderRadius: 12, 
+                marginTop: 8,
+                overflow: 'hidden'
+              }}>
+                <Picker
+                  selectedValue={formData.specialty}
+                  onValueChange={(itemValue) => setFormData({ ...formData, specialty: itemValue })}
+                  style={{ color: textColor }}
+                  dropdownIconColor={iconColor}
+                >
+                  <Picker.Item label="Sélectionner une spécialité..." value="" />
+                  {specialties.map(spec => (
+                    <Picker.Item key={spec} label={spec} value={spec} />
+                  ))}
+                </Picker>
+              </View>
             </View>
 
             <View style={styles.inputGroup}>

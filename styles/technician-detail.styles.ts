@@ -61,7 +61,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 4,
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: '#FFFFFF',
+    borderColor: 'rgba(150, 150, 150, 0.2)',
   },
   statusBadgeText: {
     fontSize: 12,
@@ -110,13 +110,13 @@ export const styles = StyleSheet.create({
     }),
   },
   callButton: {
-    backgroundColor: 'rgba(30, 41, 59, 0.8)',
+    backgroundColor: 'rgba(150, 150, 150, 0.1)',
   },
   messageButton: {
-    backgroundColor: 'rgba(30, 41, 59, 0.8)',
+    backgroundColor: 'rgba(150, 150, 150, 0.1)',
   },
   mailButton: {
-    backgroundColor: 'rgba(30, 41, 59, 0.8)',
+    backgroundColor: 'rgba(150, 150, 150, 0.1)',
   },
   card: {
     backgroundColor: 'rgba(150, 150, 150, 0.05)',
@@ -152,7 +152,7 @@ export const styles = StyleSheet.create({
     marginBottom: 12,
   },
   customPickerButton: {
-    backgroundColor: '#1E293B',
+    backgroundColor: 'rgba(150, 150, 150, 0.1)',
     borderRadius: 16,
     paddingHorizontal: 16,
     paddingVertical: 14,
@@ -182,7 +182,7 @@ export const styles = StyleSheet.create({
     padding: 20,
   },
   modalContent: {
-    backgroundColor: '#1E293B',
+    backgroundColor: 'rgba(30, 41, 59, 1)',
     borderRadius: 24,
     width: '100%',
     padding: 24,
@@ -282,7 +282,7 @@ export const styles = StyleSheet.create({
   },
   taskInput: {
     fontSize: 16,
-    color: '#ECEDEE',
+    color: 'inherit',
     fontWeight: '500',
     padding: 0,
     minHeight: 40,
