@@ -1,0 +1,76 @@
+[
+  {
+    "id": "it-1",
+    "firstName": "Jean",
+    "lastName": "Dupont",
+    "specialty": "Réseaux",
+    "status": "Disponible",
+    "radius": 50,
+    "address": "10 Rue Saint-Ferréol, 13001 Marseille",
+    "tjm": 450,
+    "phone": "06 01 02 03 04",
+    "email": "j.dupont@powrh.fr"
+  },
+  {
+    "id": "it-2",
+    "firstName": "Marie",
+    "lastName": "Lefebvre",
+    "specialty": "Base de données",
+    "status": "Actif",
+    "radius": 40,
+    "address": "5 Avenue du Prado, 13008 Marseille",
+    "tjm": 550,
+    "phone": "06 11 12 13 14",
+    "email": "m.lefebvre@powrh.fr",
+    "currentTask": "Migration Oracle"
+  },
+  {
+    "id": "it-3",
+    "firstName": "Pierre",
+    "lastName": "Martin",
+    "specialty": "Réseaux",
+    "status": "Disponible",
+    "radius": 30,
+    "address": "25 Boulevard Michelet, 13009 Marseille",
+    "tjm": 400,
+    "phone": "06 21 22 23 24",
+    "email": "p.martin@powrh.fr"
+  },
+  {
+    "id": "it-4",
+    "firstName": "Sophie",
+    "lastName": "Petit",
+    "specialty": "Développement",
+    "status": "Disponible",
+    "radius": 60,
+    "address": "15 Rue de la République, 13002 Marseille",
+    "tjm": 500,
+    "phone": "06 31 32 33 34",
+    "email": "s.petit@powrh.fr"
+  },
+  {
+    "id": "it-5",
+    "firstName": "Thomas",
+    "lastName": "Robert",
+    "specialty": "DevOps",
+    "status": "Actif",
+    "radius": 45,
+    "address": "8 Quai du Port, 13002 Marseille",
+    "tjm": 600,
+    "phone": "06 41 42 43 44",
+    "email": "t.robert@powrh.fr",
+    "currentTask": "CI/CD Pipeline"
+  },
+  {
+    "id": "it-6",
+    "firstName": "Julie",
+    "lastName": "Morel",
+    "specialty": "SupportIT",
+    "status": "Indisponible",
+    "radius": 20,
+    "address": "Place de la Castellane, 13006 Marseille",
+    "tjm": 350,
+    "phone": "06 51 52 53 54",
+    "email": "j.morel@powrh.fr"
+  }
+]
