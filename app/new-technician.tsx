@@ -34,10 +34,7 @@ export default function NewTechnicianScreen() {
   const handleSubmit = () => {
     console.log('--- Form Submission ---');
     console.log('Data:', formData);
-    
-    // Basic validation
     if (!formData.firstName || !formData.lastName || !formData.address) {
-      console.warn('Validation error: Missing required fields');
       alert('Veuillez remplir les champs obligatoires (Nom, Prénom, Adresse)');
       return;
     }
@@ -60,7 +57,6 @@ export default function NewTechnicianScreen() {
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
         >
-        {/* Identité */}
         <View style={styles.section}>
           <ThemedText style={styles.sectionTitle}>Identité</ThemedText>
           
@@ -114,7 +110,6 @@ export default function NewTechnicianScreen() {
           </View>
         </View>
 
-        {/* Localisation */}
         <View style={styles.section}>
           <ThemedText style={styles.sectionTitle}>Localisation</ThemedText>
           
@@ -155,7 +150,6 @@ export default function NewTechnicianScreen() {
           </View>
         </View>
 
-        {/* Activité */}
         <View style={styles.section}>
           <ThemedText style={styles.sectionTitle}>Activité</ThemedText>
           
@@ -189,7 +183,6 @@ export default function NewTechnicianScreen() {
         </View>
       </ScrollView>
 
-      {/* Save Button */}
       <View style={styles.footer}>
         <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
           <Feather name="save" size={20} color="#FFF" />

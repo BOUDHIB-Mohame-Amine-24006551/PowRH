@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: 16,
-    paddingBottom: 120, // Space for footer
+    paddingBottom: 120,
   },
   section: {
     backgroundColor: 'rgba(150, 150, 150, 0.1)',
@@ -124,7 +124,7 @@ export const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: 'rgba(30, 41, 59, 0.95)', // Background semi-transparent pour l'effet flottant
+    backgroundColor: 'rgba(30, 41, 59, 0.95)',
     padding: 16,
     paddingBottom: Platform.OS === 'ios' ? 34 : 20,
     borderTopWidth: 1,

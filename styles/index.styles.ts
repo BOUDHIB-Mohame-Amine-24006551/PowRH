@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
   },
   header: {
     paddingHorizontal: 16,
-    paddingTop: 64, // Status bar spacing
+    paddingTop: 64,
     paddingBottom: 16,
     borderBottomWidth: 1,
     borderBottomColor: 'rgba(150, 150, 150, 0.15)',

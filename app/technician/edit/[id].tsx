@@ -65,7 +65,6 @@ export default function EditTechnicianScreen() {
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
         >
-          {/* IDENTITÉ */}
           <View style={styles.section}>
             <ThemedText style={styles.sectionTitle}>Identité</ThemedText>
             
@@ -118,7 +117,6 @@ export default function EditTechnicianScreen() {
             </View>
           </View>
 
-          {/* LOCALISATION */}
           <View style={styles.section}>
             <ThemedText style={styles.sectionTitle}>Localisation</ThemedText>
             
@@ -159,7 +157,6 @@ export default function EditTechnicianScreen() {
             </View>
           </View>
 
-          {/* ACTIVITÉ */}
           <View style={styles.section}>
             <ThemedText style={styles.sectionTitle}>Activité</ThemedText>
             
@@ -191,7 +188,6 @@ export default function EditTechnicianScreen() {
           </View>
         </ScrollView>
 
-        {/* Footer with Save Button */}
         <View style={styles.footer}>
           <TouchableOpacity style={styles.submitButton} onPress={handleSave}>
             <Feather name="save" size={20} color="#FFF" />

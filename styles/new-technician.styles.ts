@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: 16,
-    paddingBottom: 120, // Space for the floating button
+    paddingBottom: 120,
   },
   section: {
     backgroundColor: 'rgba(150, 150, 150, 0.1)',

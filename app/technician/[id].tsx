@@ -83,7 +83,6 @@ export default function TechnicianDetailScreen() {
           if (buttonIndex > 0) {
             const selectedStatus = options[buttonIndex - 1];
             if (selectedStatus === 'Actif') {
-              // Bloc système iPhone natif
               Alert.prompt(
                 `Tâche affectée à ${technician.firstName} ${technician.lastName}`,
                 'Renseigner la tâche à affecter à ce technicien (obligatoire)',
@@ -110,7 +109,6 @@ export default function TechnicianDetailScreen() {
         }
       );
     } else {
-      // Pour Android, on ouvre notre Modal Material
       setStatusModalVisible(true);
     }
   };
@@ -127,7 +125,6 @@ export default function TechnicianDetailScreen() {
 
   return (
     <ThemedView style={styles.container}>
-      {/* Configuration du titre dynamique et du bouton modifier dans la barre de navigation */}
       <Stack.Screen
         options={{
           title: `${technician.firstName} ${technician.lastName}`,
@@ -147,7 +144,6 @@ export default function TechnicianDetailScreen() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        {/* Profile Card */}
         <View style={styles.profileSection}>
           <View style={styles.avatarWrapper}>
             <View style={[styles.avatarContainer, { backgroundColor: 'rgba(37, 99, 235, 0.05)' }]}>
@@ -164,7 +160,6 @@ export default function TechnicianDetailScreen() {
           <ThemedText style={styles.specialty}>{technician.specialty}</ThemedText>
           <ThemedText style={styles.tjm}>TJM : {technician.tjm} €/jour</ThemedText>
 
-          {/* Action Buttons */}
           <View style={styles.actionContainer}>
             <TouchableOpacity style={[styles.actionButton, styles.callButton]} onPress={handleCall}>
               <Feather name="phone" size={24} color="#2563EB" />
@@ -178,7 +173,6 @@ export default function TechnicianDetailScreen() {
           </View>
         </View>
 
-        {/* Localisation & Mobilité */}
         <View style={styles.card}>
           <ThemedText style={styles.cardTitle}>Localisation & Mobilité</ThemedText>
 
@@ -195,7 +189,6 @@ export default function TechnicianDetailScreen() {
           </View>
         </View>
 
-        {/* Gestion du Statut */}
         <View style={styles.card}>
           <ThemedText style={styles.cardTitle}>Gestion du statut</ThemedText>
           <ThemedText style={styles.label}>Statut actuel</ThemedText>
@@ -231,7 +224,6 @@ export default function TechnicianDetailScreen() {
         </View>
       </ScrollView>
 
-      {/* Modal de sélection de statut universelle (Look Material pour Android) */}
       <Modal
         visible={statusModalVisible}
         transparent={true}

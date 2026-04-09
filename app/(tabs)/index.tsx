@@ -31,7 +31,6 @@ export default function DirectoryScreen() {
 
   return (
     <ThemedView style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
           <ThemedText type="title" style={[styles.title, { marginBottom: 0 }]}>Pow'RH</ThemedText>
@@ -49,8 +48,6 @@ export default function DirectoryScreen() {
             <Feather name="plus" size={24} color="#FFF" />
           </TouchableOpacity>
         </View>
-        
-        {/* Search Bar */}
         <View style={styles.searchContainer}>
           <View style={styles.searchInputWrapper}>
             <Feather name="search" size={20} color={iconColor} />
@@ -67,7 +64,6 @@ export default function DirectoryScreen() {
           </TouchableOpacity>
         </View>
 
-        {/* Filter Bar */}
         <ScrollView 
           horizontal 
           showsHorizontalScrollIndicator={false}
@@ -103,7 +99,6 @@ export default function DirectoryScreen() {
         </ScrollView>
       </View>
 
-      {/* List / Empty State */}
       {filteredTechnicians.length > 0 ? (
         <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: 16, gap: 16 }}>
           {filteredTechnicians.map((tech) => (

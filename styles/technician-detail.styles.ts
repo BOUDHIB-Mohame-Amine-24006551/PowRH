@@ -56,7 +56,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     bottom: -5,
     alignSelf: 'center',
-    backgroundColor: '#1E293B', // Dark theme background
+    backgroundColor: '#1E293B',
     paddingHorizontal: 12,
     paddingVertical: 4,
     borderRadius: 12,
@@ -66,7 +66,7 @@ export const styles = StyleSheet.create({
   statusBadgeText: {
     fontSize: 12,
     fontWeight: '700',
-    color: '#10B981', // Neon green for visibility on dark
+    color: '#10B981',
   },
   name: {
     fontSize: 24,
@@ -110,7 +110,7 @@ export const styles = StyleSheet.create({
     }),
   },
   callButton: {
-    backgroundColor: 'rgba(30, 41, 59, 0.8)', // Dark Slate Blueish
+    backgroundColor: 'rgba(30, 41, 59, 0.8)',
   },
   messageButton: {
     backgroundColor: 'rgba(30, 41, 59, 0.8)',
@@ -218,9 +218,8 @@ export const styles = StyleSheet.create({
     color: '#9BA1A6',
     fontWeight: '600',
   },
-  // Style Material 3 pour Android (Imitation Dialogue Système)
   materialModal: {
-    backgroundColor: '#1E293B', // Fond sombre Material
+    backgroundColor: '#1E293B',
     borderRadius: 28,
     width: '90%',
     padding: 24,

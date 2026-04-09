@@ -10,12 +10,12 @@ export interface Technician {
   lastName: string;
   specialty: string;
   status: TechnicianStatus;
-  radius: number; // in km
+  radius: number;
   address: string;
-  tjm: number; // Taux Journalier Moyen
+  tjm: number;
   phone: string;
   email: string;
-  currentTask?: string; // Only if 'Actif'
+  currentTask?: string;
 }
 
 interface TechnicianContextType {
@@ -33,7 +33,6 @@ export const TechnicianProvider = ({ children }: { children: ReactNode }) => {
   const [technicians, setTechnicians] = useState<Technician[]>(initialTechnicians as Technician[]);
   const [isInitialized, setIsInitialized] = useState(false);
 
-  // Load data on mount
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -51,7 +50,6 @@ export const TechnicianProvider = ({ children }: { children: ReactNode }) => {
     loadData();
   }, []);
 
-  // Save data whenever technicians state changes, only after initial load
   useEffect(() => {
     const saveData = async () => {
       if (!isInitialized) return;
